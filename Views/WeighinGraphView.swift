@@ -20,12 +20,21 @@ struct WeighinGraphView: View
         weightValues.max() ?? 1.0
     }
     
-    private var yAxisValues: [Double]
-     {
-        let low = floor(minWeight)
-        let high = ceil(maxWeight)
-        let step = ((high - low) / 4)
-        return stride(from: low, through: high, by: step).map { $0 }
+    private var yAxisValues: [Double] {
+        if (weights.count == 1)
+        {
+            let low = floor(minWeight) - 1.0
+            let high = ceil(maxWeight) + 1.0
+            let step = ((high - low) / 4)
+            return stride(from: low, through: high, by: step).map { $0 }
+        }
+        else
+        {
+            let low = floor(minWeight)
+            let high = ceil(maxWeight)
+            let step = ((high - low) / 4)
+            return stride(from: low, through: high, by: step).map { $0 }
+        }
     }
     
     private var xAxisValues: [Date] 
